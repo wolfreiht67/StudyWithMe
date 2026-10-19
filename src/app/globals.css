@@ -1,26 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-night: #0e0f1f;
+  --color-card: #181a32;
+  --color-card-2: #21244a;
+  --color-line: #2c3060;
+  --color-ink: #eceaff;
+  --color-muted: #a3a6cf;
+  --color-accent: #8f7cff;
+  --color-accent-2: #5ed3c4;
+  --color-warm: #ffb86b;
+  --color-danger: #ff7a8a;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #2a2163 0%, transparent 60%),
+    radial-gradient(900px 500px at 110% 10%, #12395a 0%, transparent 55%),
+    var(--color-night);
+  background-attachment: fixed;
+  color: var(--color-ink);
+}
+
+@utility card {
+  @apply rounded-2xl border border-line bg-card/80 backdrop-blur;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition active:scale-[0.98] disabled:opacity-40;
+}
+@utility btn-primary {
+  @apply btn bg-accent text-night hover:brightness-110;
+}
+@utility btn-ghost {
+  @apply btn border border-line bg-card-2/60 text-ink hover:bg-card-2;
+}
+@utility input {
+  @apply w-full rounded-xl border border-line bg-night/60 px-3 py-2 text-sm text-ink outline-none placeholder:text-muted/60 focus:border-accent;
+}
+@utility label {
+  @apply mb-1 block text-xs font-medium uppercase tracking-wide text-muted;
+}
+
+@keyframes pop {
+  0% { transform: translateY(12px) scale(0.96); opacity: 0; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+.animate-pop {
+  animation: pop 0.25s ease-out;
 }
